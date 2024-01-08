@@ -1,11 +1,58 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+left to right direction
+actor 用户 as user
 
-autonumber
+package "测试项目维护" {
+    usecase "项目创建和人员管理" as UC1
+    usecase "创建和管理测试集" as UC2
+    usecase "测试集用例批量执行" as UC2_1
+    usecase "测试用例创建和维护" as UC3
+    usecase "测试用例与接口实例关联" as UC3_1
+    usecase "执行记录查询和筛选" as UC4
+    usecase "缺陷记录和关联" as UC5
+    usecase "多维度统计分析和图表展示" as UC6
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+    UC2 <|-- UC2_1 : include
+    UC3 <|-- UC3_1 : include
+}
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+user --> UC1
+user --> UC2
+user --> UC3
+user --> UC4
+user --> UC5
+user --> UC6
+
+package "测试数据集管理" {
+    usecase "创建和维护测试数据集" as UC7
+    usecase "创建和管理自定义数据规则" as UC8
+    usecase "创建和维护数据模型" as UC9
+
+}
+
+user --> UC7
+user --> UC8
+user --> UC9
+package "请求仿真测试" {
+    usecase "接口信息批量导入" as UC10
+    usecase "接口信息批量导出" as UC11
+    usecase "HTTP 接口信息管理" as UC12
+    usecase "TCP 接口信息管理" as UC13
+    usecase "接口报文维护和数据格式解析" as UC14
+    usecase "配置接口报文域生成规则并仿真测试" as UC15
+
+    UC10 <|-- UC11 : extend
+    UC12 <|-- UC14 : include
+    UC13 <|-- UC14 : include
+}
+
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14
+user --> UC15
+user --> UC10
+
+
+
 @enduml
